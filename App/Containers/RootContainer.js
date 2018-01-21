@@ -5,7 +5,7 @@ import { NavigationActions } from 'react-navigation'
 import ReduxNavigation from '../Navigation/ReduxNavigation'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
-// import { Toast } from 'next-ui'
+import Toast from '../Components/Toast'
 
 class RootContainer extends Component {
   componentDidMount () {
@@ -26,13 +26,13 @@ class RootContainer extends Component {
         this.props.goBack({ key: routes[routes.length - 1]['key'] })
         return true
       }
-      // 如果为根,2s 连续返回 即退出
+      // if in root, < 2s
       if (this.lastBackPressed && (this.lastBackPressed + 2000 >= Date.now())) {
         BackHandler.exitApp()
         return true
       }
       this.lastBackPressed = Date.now()
-      // Toast.show('再按一次退出应用')
+      Toast.show('again quit')
       return true
     })
   }
